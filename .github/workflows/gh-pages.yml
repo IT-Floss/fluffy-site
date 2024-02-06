@@ -5,6 +5,10 @@ on:
     branches:
       - main  # Set a branch to deploy
 
+env:
+  HUGO_services_googleAnalytics_ID: ${{ vars.HUGO_services_googleAnalytics_ID }}
+  HUGO_ENV: "production"
+
 jobs:
   deploy:
     runs-on: ubuntu-20.04
@@ -19,6 +23,10 @@ jobs:
         with:
           hugo-version: 'latest'
           extended: true
+
+      - name: Display the path
+        shell: bash
+        run: echo $HUGO_services_googleAnalytics_ID
 
       - name: Build
         if: github.repository == 'IT-Floss/IT-Floss.github.io'
